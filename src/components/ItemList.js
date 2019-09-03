@@ -16,7 +16,7 @@ class ItemList extends Component {
 
   componentDidMount() {
     const pusher = new Pusher("websocketkey", {
-      wsHost: "127.0.0.1",
+      wsHost: "192.168.223.74",
       wsPort: 6001
     });
     const channel = pusher.subscribe("list");
@@ -35,7 +35,7 @@ class ItemList extends Component {
     const { item } = this.state;
 
     const instance = axios.create({
-      baseURL: "http://localhost:8000/api/"
+      baseURL: "http://192.168.223.74:8000/api/"
     });
 
     instance.post(`/items`, { item }, { port: 8000 }).then(res => {
@@ -57,7 +57,7 @@ class ItemList extends Component {
         <List component="nav">
           {items.map(item => {
             return (
-              <ListItem button>
+              <ListItem key={item.id} button>
                 <ListItemText primary={item.item} />
               </ListItem>
             );
